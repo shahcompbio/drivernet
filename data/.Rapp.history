@@ -1,0 +1,250 @@
+library(stats)
+library(stats4)
+search()
+installed()
+apropos("install")
+installed.packages()
+download.packages()
+update.packages()
+demo(graphics)
+x11()
+?device
+quartz()
+dev.list()
+x11()
+quartz()
+dev.list()
+dev.cur()
+layout(matrix(1:6, 3,2))
+layout.show(6)
+layout.show(4)
+x <- c(1:10)
+plot(x)
+y <- c(10:1)
+plot(x,t)
+plot(x,y)
+reverse(y)
+y <- rev(y)
+plot(x,y)
+sunflowerplot(x,y)
+x <- rep(x, 4)
+x
+y <- rep(y, 4)
+sunflowerplot(x,y)
+x
+x <- rep(x, 4)
+y <- rep(y, 4)
+sunflowerplot(x,y)
+pie(x)
+x <- c(1:15)
+pie(x)
+boxplot(x)
+stripchart(x)
+example(coplot)
+quartz()
+example(coplot)
+example(interaction.plot)
+points(0.5, 66, type="n")
+text(0.5, 66, "test")
+quartz()
+plot(x)
+points(5,4, type="n")
+x <- rnorm(10)
+y <- rnorm(10)
+plot(x,y)
+par(bty="7")
+plot(x,y)
+par(bty="u")
+plot(x,y)
+par(bty="o")
+plot(x,y)
+plot(x,y xlab="Ten random values", ylab="Ten other values", xlim=c(-2,2), ylim=c(-2,2), pch=22, col="red", bg= "yellow", bty="1", tcl=0.4, main="How to customize a plot with R", las=1, cex=1.5)
+plot(x,y, xlab="Ten random values", ylab="Ten other values", xlim=c(-2,2), ylim=c(-2,2), pch=22, col="red", bg= "yellow", bty="1", tcl=0.4, main="How to customize a plot with R", las=1, cex=1.5)
+plot(x,y, xlab="Ten random values", ylab="Ten other values", xlim=c(-2,2), ylim=c(-2,2), pch=22, col="red", bg= "yellow", bty="o", tcl=0.4, main="How to customize a plot with R", las=1, cex=1.5)
+?match.call()
+ls()
+ls
+ls()
+installed.packages()
+library(DriverNet, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+ls
+??DriverNet
+?DriverNet
+ls()
+data("mutationsCopyNumber_outliers_genes.RData")
+load("mutationsCopyNumber_outliers_genes.RData")
+data("mutationsCopyNumber_outliers_genes.RData", lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data("mutationsCopyNumber_outliers_genes.RData",package="DriverNet" lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+?data
+data("mutationsCopyNumber_outliers_genes.RData",package="DriverNet", lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data("data/mutationsCopyNumber_outliers_genes.RData",package="DriverNet", lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data(package="DriverNet")
+data("pat_mut")
+data(pat_mut)
+data("pat_mut", package="DriverNet")
+ls
+data(package="DriverNet")
+data(mutationsCopyNumber_outliers_genes, package="DriverNet")
+ls
+ls()
+data(mutationsCopyNumber_outliers_genes.RData, package="DriverNet")
+data("mutationsCopyNumber_outliers_genes.RData", package="DriverNet")
+remove.packages("DriverNet")
+remove.packages("DriverNet", lib = "/Users/klui/Desktop/Rpkg/tmplib")
+ls
+library(DriverNet, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data(mutationsCopyNumber_outliers_genes, package="DriverNet")
+library(DriverNet, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data(mutationsCopyNumber_outliers_genes, package="DriverNet")
+ls
+ls()
+data(mutationsCopyNumber_outliers_genes, package="DriverNet", lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+?data
+?load
+data()
+data(package = .packages(all.available = TRUE))
+data(lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data(package = "DriverNet", lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+library(DriverNet, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+data(mutationsCopyNumber_outliers_genes, package="DriverNet")
+data(package="DriverNet")
+data(reactome_graph, package="DriverNet")
+ls()
+tmp = reduce_matrices(W_all, pat_mut, pat_outlier)
+tmp2 = consist_matrices(W_all, pat_mut, pat_outlier)
+tmp == tmp2
+tmp[[1]] == tmp2[[1]]
+tmp[[2]] == tmp2[[2]]
+?apply
+identical(tmp, tmp2)
+identical(tmp[[1]], tmp2[[1]])
+remove.packages("DriverNet", lib = "/Users/klui/Desktop/Rpkg/tmplib")
+load_data()
+?load_data
+installed.packages()
+source("http://bioconductor.org/biocLite.R")
+biocLite("MyPackage")
+biocLite("DriverNet")
+remove.packages("DriverNet", lib = "/Users/klui/Desktop/Rpkg/tmplib")
+installed.packages()
+library(HMMcopy)
+library(HMMcopy, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+example("HMMcopy-package")
+bin/readCounter
+vignette("HMMcopy")
+ls
+ls()
+vignette(HMMcopy, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+vignette("HMMcopy", lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+library=(help = "HMMcopy")
+library(help = "HMMcopy")
+ls("package:HMMcopy")
+lsf.str("package:HMMcopy")
+?stateCols
+?plotBias
+ls
+ls()
+data(tumour)
+ls()
+library(help = "HMMcopy-package")
+??HMMcopy-dataset
+?HMMcopy-dataset
+library(help = "HMMcopy")
+?HMMcopy-package
+load("/Users/klui/dmpaper/code_data/networks/clique_graph/purturbed_reactome_graph.RData")
+ls()
+x = [1..10]
+x <- [1..10]
+apropos("seq")
+?seq
+Gnames[seq(1,10), seq(1,10)]
+Gnames[seq(1,10)]
+Gnames[[1]]
+Gnames[[1]][[1]]
+Gnames[[1]][[seq(1,20)]]
+Gnames[[1]][seq(1,20)]
+length(Gnames)
+length(Gnames[[1]])
+length(Gnames[[2]])
+?list
+tmp = list()
+tmp
+?t
+?cat
+library(HMMcode)
+library(HMMcopy)
+library(HMMcopy, lib.loc = "/Users/klui/Desktop/Rpkg/tmplib/")
+?HMMcopy-package
+?HMMcopy
+help(HMMcopy)
+help(package=HMMcopy)
+?HMMcopy
+?HMMcopy-package
+ls
+fname = "test"
+fname = paste(fname, date(), ".txt", sep="")
+fname
+?date
+Sys.Date()
+Sys.Time()
+Sys.ime()
+Sys.time()
+format(Sys.time(), "%a %b %d %X %Y")
+format(Sys.time(), "%Y%m%d%H%d")
+format(Sys.time(), "%Y%m%d_%H%d")
+format(Sys.time(), "%Y_%m_%d_%H%d")
+a = 0
+b = 10
+c = "AETE"
+d = list(a, b, c)
+d
+rownames(d)
+names(d)
+colnames(d)
+?list
+d = list("namea"=a, b, c)
+d
+list["namea"]
+list("namea")
+d("namea")
+d["namea"]
+remove.packages("DriverNet", lib = "/Users/klui/Desktop/Rpkg/tmplib")
+library(DriverNet, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+??DriverNet-package
+?DriverNet-package
+?DriverNet
+source("http://bioconductor.org/biocLite.R")
+biocLite("Rsamtools")
+library(package=Rsamtools)
+??Rsamtools-package
+?Rsamtools-package
+?Rsamtools
+remove.packages("DriverNet", lib = "/Users/klui/Desktop/Rpkg/tmplib")
+?load
+load(system.file("data", "sampleData.rda", package="DriverNet"))
+library(DriverNet, lib.loc="/Users/klui/Desktop/Rpkg/tmplib")
+load(system.file("data", "sampleData.rda", package="DriverNet"))
+ls()
+message("test")
+?colSums
+?prompt
+setwd("/Users/klui/dmpaper/code_data/BioConductorPackage/PackageMetaData/data/")
+ls
+ls()
+load("sampleData.rda")
+ls
+ls()
+prompt(geneNames,filename="test")
+ls
+ls()
+prompt(patientMutationMatrix,filename="patientMutationMatrix.Rd")
+prompt(reducedInfluenceGraph,filename="reducedInfluenceGraph.Rd")
+prompt(reducedPatientMutationMatrix,filename="reducedPatientMutationMatrix.Rd")
+prompt(reducedPatientOutlierMatrix,filename="reducedPatientOutlierMatrix.Rd")
+prompt(sample_main_result,filename="sample_main_result.Rd")
+load("/Users/klui/dmpaper/code_data/BioConductorPackage/PackageMetaData/data/sampleInfluenceGraph.rda")
+load("/Users/jding/Work/paper/BioConductorPackage/PackageMetaData/data/sampleDriversList.rda")
+ls()
+sampleDriversList[1]
+sampleDriversList[[1]]
+sampleDriversList

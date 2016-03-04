@@ -1,0 +1,115 @@
+%\VignetteIndexEntry{An introduction to DriverNet}
+%\VignetteDepends{}
+%\VignettePackage{DriverNet}
+\documentclass[]{article}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{times}
+\usepackage{hyperref}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Rcode}[1]{{\texttt{#1}}}
+
+\newcommand{\software}[1]{\textsf{#1}}
+\newcommand{\R}{\software{R}}
+\newcommand{\DriverNet}{\Rpackage{DriverNet}}
+
+
+\title{\Rpackage{DriverNet} package}
+\author{Ali Bashashati, Reza Haffari, Jiarui Ding, Gavin Ha,  Kenneth Liu, \\ Jamie Rosner and Sohrab Shah}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+%<<options,echo=F>>=
+%options(width=60)
+%@ 
+
+%<<preliminaries>>=
+%library(DriverNet)
+%@ 
+
+\section{Overview}
+DriverNet is a package to predict functional important driver genes in cancer by integrating genome data (mutation and copy number variation data) and transcriptome data (gene expression data). The different kinds of data are combined by an influence graph, which is a gene-gene interaction network deduced from pathway data. A greedy algorithm is used to find the possible driver genes, which may mutated in a larger number of patients and these mutations will push the gene expression values of the connected genes to some extreme values.
+
+Specifically, DriverNet formulates associations between mutations and expression levels using bipartite graph where nodes are i) the set of mutated genes $M$ and ii) the set of genes exhibiting outlying gene expression $G$.  An edge $E(g_i, g_j)$ between nodes in $M$ and $G$ are drawn under three conditions: gene $g_i \in M$ is mutated in patient $p$ of the population; gene $g_j$ shows outlying expression in patient $p$; and $g_i$ and $g_j$ are known to interact according to an influence graph.  Our approach then uses a greedy optimization approach to explain the most number of nodes in $G$ with the fewest number of nodes in $M$.  The genes explaining the highest number of outlying expression events are nominated as putative driver genes. Finally, we apply statistical significance tests to these candidates based on null distributions informed by stochastic resampling.  
+
+
+%==========================================================================
+\section{Datasets}
+The package includes the matrices deduced from part of the TCGA Glioblastoma multiforme (GBM) data. For both \texttt{samplePatientMutationMatrix} and \texttt{samplePatientOutlierMatrix}, they are binary matrices and the row names are patients and the column names are genes. 
+
+<<options,echo=F>>=
+options(width=60)
+@ 
+
+<<preliminaries>>=
+library(DriverNet)
+
+data(samplePatientMutationMatrix)
+data(samplePatientOutlierMatrix)
+data(sampleInfluenceGraph)
+data(sampleGeneNames)
+
+@
+
+%==========================================================================
+\section{Rank genes}
+\texttt{computeDrivers} is the main function, which uses a greedy algorithm to rank each mutated gene based on how many outliers gene the mutated gene can cover.
+<<options,echo=F>>=
+options(width=60)
+@ 
+
+<<preliminaries>>=
+# The main function to compute drivers
+driversList = computeDrivers(samplePatientMutationMatrix, 
+              samplePatientOutlierMatrix,sampleInfluenceGraph,
+              outputFolder=NULL, printToConsole=FALSE)
+
+drivers(driversList)[1:10]
+@
+
+%==========================================================================
+\section{Compute p-values}
+The statistical significance of the driver genes are assessed using a randomization framework.  The original datasets are permuted $N$ times, and the algorithm is run on randomly generated datasets $N$ times and results on real data are assessed to see if they are significantly different from the results on randomized datasets.  This in an indirect way of perturbing the bipartite graph corresponding to the original problem. To generate the random datasets, we keep the contents of patient-mutation, $M$, and patient-outlier, $G^{\prime}$, matrices the same but replace the gene symbols with a randomly selected set of genes from the Ensmbl 54 protein-coding gene list. Using the same influence graph, the algorithm is run on the new patient-mutation, $M_1...M_N$, and patient-outlier, $G_1^{\prime}...G_N^{\prime}$, matrices.
+
+Suppose $D$ is the result of driver mutation discovery algorithm. $D$ contains a ranked list of driver genes with their corresponding node coverage in the bipartite graph, $\mathcal{B}$. The statistical significance of a gene $g \in D$ with a corresponding node coverage, $COV_g$, is the fraction of times that we observe driver genes in our random data runs $i$, with node coverage more than $COV_g$.
+
+<<options,echo=F>>=
+options(width=60)
+@ 
+
+<<preliminaries>>=
+# random permute the gene labels to compute p-values
+randomDriversResult = computeRandomizedResult(
+  patMutMatrix=samplePatientMutationMatrix,
+  patOutMatrix=samplePatientOutlierMatrix, 
+  influenceGraph=sampleInfluenceGraph,
+  geneNameList= sampleGeneNames, outputFolder=NULL, 
+  printToConsole=FALSE,numberOfRandomTests=20, weight=FALSE, 
+  purturbGraph=FALSE, purturbData=TRUE)
+@
+
+%==========================================================================
+\section{Summarize the results}
+Finlly, we provide a function to summarize the results.
+<<options,echo=F>>=
+options(width=60)
+@ 
+
+<<preliminaries>>=
+# Summarize the results
+res = resultSummary(driversList, randomDriversResult, 
+      samplePatientMutationMatrix,sampleInfluenceGraph,
+      outputFolder=NULL, printToConsole=FALSE)
+res[1:2,]
+@
+
+\end{document}

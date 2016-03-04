@@ -1,0 +1,9 @@
+exportPattern("^[[:alpha:]]+")
+exportMethods(
+    "actualEvents",
+    "drivers",
+    "totalEvents" 
+)
+exportClasses(
+    "DriverNetResult" 
+)

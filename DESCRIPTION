@@ -1,0 +1,13 @@
+Package: DriverNet
+Type: Package
+Title: Drivernet: uncovering somatic driver mutations modulating
+        transcriptional networks in cancer
+Version: 1.0.0
+Date: 2012-03-21
+Author: Ali Bashashati, Reza Haffari, Jiarui Ding, Gavin Ha,  Kenneth Liu, Jamie Rosner and Sohrab Shah
+Maintainer: Jiarui Ding <jiaruid@cs.ubc.ca>
+Description: DriverNet is a package to predict functional important driver genes in cancer by integrating genome data (mutation and copy number variation data) and transcriptome data (gene expression data). The different kinds of data are combined by an influence graph, which is a gene-gene interaction network deduced from pathway data. A greedy algorithm is used to find the possible driver genes, which may mutated in a larger number of patients and these mutations will push the gene expression values of the connected genes to some extreme values.
+License: GPL-3
+LazyLoad: yes
+Depends: R (>= 2.10), methods
+Packaged: 2012-04-02 21:19:04 UTC; jding
