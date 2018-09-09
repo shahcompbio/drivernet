@@ -1,7 +1,10 @@
 ## Runs the greedy algorithm on randomized input to produce random result list of drivers for significance test
 ## outputFolder = NULL -> no output any file
 ## outputFolder = "" -> current folder
-computeRandomizedResult <- function(patMutMatrix, patOutMatrix, influenceGraph, geneNameList, outputFolder = NULL, printToConsole = FALSE, numberOfRandomTests = 500,  weighted = FALSE, purturbGraph = FALSE, purturbData = TRUE) {
+#
+#' @importFrom doParallel 
+#
+computeRandomizedResult <- function(patMutMatrix, patOutMatrix, influenceGraph, geneNameList, outputFolder = NULL, printToConsole = FALSE, numberOfRandomTests = 500,  weighted = FALSE, purturbGraph = FALSE, purturbData = TRUE, num_cores=1) {
   if (weighted) {
     stop("Weighted algorithm is not implemented.")
   }
@@ -25,9 +28,12 @@ computeRandomizedResult <- function(patMutMatrix, patOutMatrix, influenceGraph, 
       nG_out <- .neighborGraph(influenceGraph[intersect(colnames(patMutMatrix), rownames(influenceGraph)), intersect(colnames(influenceGraph), colnames(patOutMatrix))])   ## genes whose expression is affected by dna mutation in g
   }
 
-  coverageResults <- vector(mode="list", length=numberOfRandomTests)
+  registerDoParallel(cores=num_cores)
+
+
   i <- 1
-  for (i in 1:numberOfRandomTests) {
+  coverageResults = foreach (i=1:numberOfRandomTests) %dopar% {
+      message("rand iteration: ", i)
       randomPatMutMatrix <- patMutMatrix
       randomPatOutMatrix <- patOutMatrix
       if (purturbData) {
@@ -68,7 +74,7 @@ computeRandomizedResult <- function(patMutMatrix, patOutMatrix, influenceGraph, 
                   coverageVector[[k]] <- nrow(runResult$actualEvents[[k]])
                 }
             }
-            coverageResults[[i]] <- coverageVector
+            coverageVector
         }
       }
   }
@@ -79,3 +85,4 @@ computeRandomizedResult <- function(patMutMatrix, patOutMatrix, influenceGraph, 
 
   coverageResults
 }
+
